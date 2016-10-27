@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+ <meta charset="UTF-8">
+ <title>What's wrong here?</title>
+</head>
+<body>
+<?php
+function loginUser($email,$password){ //imagine valid login routine }
+if($_POST['submit']){
+ loginUser($_POST['email'],$_POST['password']);
+}
+else{ ?>
+<form> 
+ <label>
+ Email: <input type="email">
+ </label>
+ <label>
+ Password: <input type="password">
+ </label>
+ <input type="submit" />
+</form>
+<?php } ?>
+</body>
+</html>
+
+—————————————————————
+
+1.change the ($_POST[’submit’]) to $_SERVER[REQUEST_METHOD]=“POST“ to check if the form is transmitted pro POST
+
+2.the default method for form is GET. Since GET is not safe, we need to change <form> method by add a post method here. <form method=“POST“> 
+
+3.in the “input“ tags the type should actually be “text“, 
+“email“ and “password“ are actually the keyword of the data.
+<input type = “text“ name =“email“>
+<input type =“text“ name =“password“>
