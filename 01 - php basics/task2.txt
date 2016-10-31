@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+    </style>
+</head>
+<body>
+<?php
+function shuffleTheText($originText)
+{
+$wordsOfString=array();
+    $resultAfterShuffle ="the text need to be exchanged" ;
+
+$wordsOfString=explode(" ",$originText);
+$result = array();
+$count_i = 0;
+foreach($wordsOfString as $i)
+{
+    $test_i = substr($i,(strlen($i)-1),1);
+    if (strlen($i) > 3) {
+        if((($test_i>='A')&&($test_i<='Z'))||(($test_i>='a')&&($test_i<='z'))) {
+            $temp = substr($i, 1, (strlen($i) - 2));
+            $temp = str_shuffle($temp);
+            $i = substr_replace($i, $temp, 1, (strlen($i) - 2));
+            $result[$count_i] = $i;
+            $count_i++;
+        }
+        else
+        {
+            $temp = substr($i,1,(strlen($i)-3));
+            $temp = str_shuffle($temp);
+            $i = substr_replace($i,$temp, 1,(strlen($i)-3));
+            $result[$count_i] = $i;
+            $count_i++;
+        }
+    }
+    else {
+        $result[$count_i] = $i;
+        $count_i++;
+    }
+
+}
+    $resultAfterShuffle = implode(" ",$result);
+
+return $resultAfterShuffle;
+}
+?>
+
+</p>
+<h3> Please input your text here </h3>
+<form method = "POST">
+    <textarea name ="originText" row="10" cols="30"></textarea><br>
+    <input type ="submit" value ="start"><br>
+    <p> The original text is:<br>
+        ---------------------<br>
+    <?php
+        if(isset($_POST["originText"]))
+       echo $_POST["originText"];
+    ?>
+    </p>
+
+    <p> After exchange the order:<br>
+        --------------------------<br>
+        <?php
+            if(isset($_POST["originText"]))
+            echo shuffleTheText($_POST["originText"]);
+        ?>
+
+</form>
+
+
+</body>
+
+<?php
+?>
